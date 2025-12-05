@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  backend:
+    image: node_app:latest   # <-- Use your prebuilt Node.js image
+    container_name: login_backend
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: login_db
+    depends_on:
+      - postgres
+    command: sh -c "npx sequelize db:migrate && node src/index.js"
+
+  postgres:
+    image: postgres:15
+    container_name: login_postgres
+    restart: always
+    ports:
+      - "5050:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: login_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
