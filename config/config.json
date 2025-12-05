@@ -1,24 +1,26 @@
 {
- "development": {
-    "username": "admin",
-    "password": "admin123",
-    "database": "login_db",
+  "development": {
+    "username": "postgres",
+    "password": "POSTGRES_PASS",
+    "database": "user_service",
     "host": "localhost",
-    "port": 5050,
+    "port": 5432,
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "admin",
+    "password": "admin123",
+    "database": "login_test_db",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "admin",
+    "password": "admin123",
+    "database": "login_prod_db",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres"
   }
 }

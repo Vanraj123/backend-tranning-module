@@ -1,34 +1,55 @@
-version: "3.8"
-
 services:
-  backend:
-    image: node_app:latest   # <-- Use your prebuilt Node.js image
-    container_name: login_backend
+  app:
+    build: .
+    container_name: node_app
     restart: always
     ports:
       - "4000:4000"
     environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: admin
-      DB_PASSWORD: admin123
-      DB_NAME: login_db
+      NODE_ENV: development
+      POSTGRES_HOST: postgres
+      POSTGRES_DATABASE: user_service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: POSTGRES_PASS
+      REDIS_HOST: redis              # <── add this
     depends_on:
       - postgres
-    command: sh -c "npx sequelize db:migrate && node src/index.js"
+      - redis                        # <── add this
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
 
   postgres:
     image: postgres:15
-    container_name: login_postgres
+    container_name: postgres_db
     restart: always
-    ports:
-      - "5050:5432"
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: login_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: POSTGRES_PASS
+      POSTGRES_DB: user_service
+    ports:
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  redis:                              # <── add Redis service
+    image: redis:7
+    container_name: redis_db
+    restart: always
+    ports:
+      - "6379:6379"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
 
 volumes:
   pgdata:

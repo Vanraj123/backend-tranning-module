@@ -2,11 +2,13 @@ const session = require("express-session");
 const Redis = require("redis");
 let RedisStore = require("connect-redis").default;
 
-// Redis v4 client
-const redisClient = Redis.createClient({ url: "redis://localhost:6379" });
+const redisClient = Redis.createClient({
+  url: `redis://${process.env.REDIS_HOST || "localhost"}:6379`
+});
 
 redisClient.on("error", (err) => console.error("Redis Error:", err));
-redisClient.connect(); // only for Redis v4+
+
+redisClient.connect();
 
 module.exports = session({
   store: new RedisStore({ client: redisClient }),

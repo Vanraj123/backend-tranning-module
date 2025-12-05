@@ -3,7 +3,7 @@ module.exports = {
     user: 'admin',
     password: 'admin123',
     host: 'localhost',
-    port: 5050,
+    port: 5432,
     database: "login_db",
     maxPoolSize: 10,
   }
