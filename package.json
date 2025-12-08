@@ -1,0 +1,41 @@
+{
+  "name": "tranning",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.11",
+    "sequelize-cli": "^6.6.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.946.0",
+    "axios": "^1.13.2",
+    "bcrypt": "^6.0.0",
+    "config": "^4.1.1",
+    "connect-redis": "^7.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "eva-utilities": "^3.0.2",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "joi": "^18.0.2",
+    "minio": "^8.0.6",
+    "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.11",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "pino": "^10.1.0",
+    "pino-http": "^11.0.0",
+    "redis": "^4.7.1",
+    "sequelize": "^6.37.7"
+  }
+}
